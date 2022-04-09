@@ -1,0 +1,207 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Metronome Synchronization on Moving Platform</title><meta name="generator" content="MATLAB 9.12"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-03-24"><meta name="DC.source" content="sm_metronome_sync.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Metronome Synchronization on Moving Platform</h1><!--introduction--><p>This example shows the phenomenon of metronomes synchronizing if they are placed on a platform that is free to slide back and forth.  This is an example of a system that follows the Kuramoto model.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#2">Model</a></li><li><a href="#3">Simulation Results from Simscape Logging</a></li><li><a href="#6">Simulation Results from Simscape Logging: Escapement Energy Off</a></li><li><a href="#10">Simulation Results from Simscape Logging: Many Rows</a></li><li><a href="#13">Simulation Results from Simscape Logging: Many Rows, Unconstrained</a></li><li><a href="#17">Simulation Results from Simscape Logging: Many Rows, Tolerances</a></li></ul></div><p><img vspace="5" hspace="5" src="sm_metronome_sync_mechExpAnim.png" alt=""> </p><h2 id="2">Model</h2><img vspace="5" hspace="5" src="sm_metronome_sync_01.png" alt=""> <h2 id="3">Simulation Results from Simscape Logging</h2><p>In the first test, we start all of the metronomes at initial angles and speeds. The amplitudes and frequencies settle to the same values due to the energy added by the escapement mechanism (modeled abstractly) and pendulum damping.  At the start of the test, all pendula are out of phase, and the platform is locked in place.</p><p>After a period of time, the platform is allowed to slide back and forth. Over time, the oscillations of the metronomes become synchronized, so that they are exactly in phase.  With different settings, the metronomes could also be exactly out of phase.</p><img vspace="5" hspace="5" src="sm_metronome_sync_02.png" alt=""> <img vspace="5" hspace="5" src="sm_metronome_sync_03.png" alt=""> <h2 id="6">Simulation Results from Simscape Logging: Escapement Energy Off</h2><p>In the second test, we turn off the abstract model of the energy added by the escapement mechanism and the friction in the pendula.  Even if we let the simulation run for a much longer time, the metronomes will not synchronize.  This shows that nonlinear effects are necessary to model certain phenomena.</p><img vspace="5" hspace="5" src="sm_metronome_sync_04.png" alt=""> <img vspace="5" hspace="5" src="sm_metronome_sync_05.png" alt=""> <h2 id="10">Simulation Results from Simscape Logging: Many Rows</h2><p>This test has 28 metronomes arranged in 7 rows.  Platform is constrained to only move along a single axis.</p><img vspace="5" hspace="5" src="sm_metronome_sync_06.png" alt=""> <img vspace="5" hspace="5" src="sm_metronome_sync_07.png" alt=""> <img vspace="5" hspace="5" src="sm_metronome_sync_08.png" alt=""> <h2 id="13">Simulation Results from Simscape Logging: Many Rows, Unconstrained</h2><p>This test has 28 metronomes arranged in 7 rows.  The platform can now move within a plane (translation in x and y, rotate about z).</p><img vspace="5" hspace="5" src="sm_metronome_sync_09.png" alt=""> <img vspace="5" hspace="5" src="sm_metronome_sync_10.png" alt=""> <img vspace="5" hspace="5" src="sm_metronome_sync_11.png" alt=""> <h2 id="17">Simulation Results from Simscape Logging: Many Rows, Tolerances</h2><p>This test has 28 metronomes arranged in 7 rows.  Platform is constrained to slide in x, and the metronomes have a random offset for the upper mass.</p><img vspace="5" hspace="5" src="sm_metronome_sync_12.png" alt=""> <img vspace="5" hspace="5" src="sm_metronome_sync_13.png" alt=""> <p class="footer">Copyright 2022 The MathWorks, Inc.<br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2022a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Metronome Synchronization on Moving Platform
+% 
+% This example shows the phenomenon of metronomes synchronizing if they are
+% placed on a platform that is free to slide back and forth.  This is an
+% example of a system that follows the Kuramoto model.
+%
+% Copyright 2022 The MathWorks, Inc.
+
+
+%%
+%
+% <<sm_metronome_sync_mechExpAnim.png>>
+
+%% Model
+
+open_system('sm_metronome_sync')
+
+set_param(find_system('sm_metronome_sync','FindAll', 'on','type','annotation','Tag','ModelFeatures'),'Interpreter','off')
+
+%% Simulation Results from Simscape Logging
+%%
+%
+% In the first test, we start all of the metronomes at initial angles and
+% speeds. The amplitudes and frequencies settle to the same values due to
+% the energy added by the escapement mechanism (modeled abstractly) and
+% pendulum damping.  At the start of the test, all pendula are out of
+% phase, and the platform is locked in place.
+% 
+% After a period of time, the platform is allowed to slide back and forth.
+% Over time, the oscillations of the metronomes become synchronized, so
+% that they are exactly in phase.  With different settings, the metronomes
+% could also be exactly out of phase.
+
+sm_metronome_sync_param
+set_param(bdroot,'StopTime','5.52*20');
+sim('sm_metronome_sync')
+sm_metronome_sync_plot1angpos;
+
+%%
+clf
+sm_metronome_sync_plot1angpos;
+set(gca,'XLim',[M_time(end)-4 M_time(end)])
+
+%% Simulation Results from Simscape Logging: Escapement Energy Off
+%%
+%
+% In the second test, we turn off the abstract model of the energy added by
+% the escapement mechanism and the friction in the pendula.  Even if we let
+% the simulation run for a much longer time, the metronomes will not
+% synchronize.  This shows that nonlinear effects are necessary to model
+% certain phenomena.
+%
+
+sm_metronome_sync_param
+metronome.b_pivot      = 0;
+metronome.esc_torque   = 0;
+set_param(bdroot,'StopTime','300');
+sim('sm_metronome_sync')
+sm_metronome_sync_plot1angpos;
+
+%%
+sm_metronome_sync_plot1angpos;
+set(gca,'XLim',[M_time(end)-4 M_time(end)])
+
+%%
+sm_metronome_sync_param
+set_param(bdroot,'StopTime','5.52*20');
+
+%% Simulation Results from Simscape Logging: Many Rows
+%%
+%
+% This test has 28 metronomes arranged in 7 rows.  Platform is constrained
+% to only move along a single axis.
+%
+
+open_system('sm_metronome_sync_lots')
+set_param(find_system('sm_metronome_sync_lots','FindAll', 'on','type','annotation','Tag','ModelFeatures'),'Interpreter','off')
+
+sm_metronome_sync_param
+sim('sm_metronome_sync_lots')
+sm_metronome_sync_plot1angpos;
+
+%%
+sm_metronome_sync_plot1angpos;
+set(gca,'XLim',[M_time(end)-4 M_time(end)])
+
+%% Simulation Results from Simscape Logging: Many Rows, Unconstrained
+%%
+%
+% This test has 28 metronomes arranged in 7 rows.  The platform can now move
+% within a plane (translation in x and y, rotate about z).
+%
+
+open_system('sm_metronome_sync_lots_contacts')
+set_param(find_system('sm_metronome_sync_lots_contacts','FindAll', 'on','type','annotation','Tag','ModelFeatures'),'Interpreter','off')
+
+sm_metronome_sync_param
+set_param(bdroot,'StopTime','300');
+sim('sm_metronome_sync_lots_contacts')
+sm_metronome_sync_plot1angpos;
+
+%%
+sm_metronome_sync_plot1angpos;
+set(gca,'XLim',[M_time(end)-4 M_time(end)])
+
+%%
+set_param(bdroot,'StopTime','5.52*20');
+
+%% Simulation Results from Simscape Logging: Many Rows, Tolerances
+%%
+%
+% This test has 28 metronomes arranged in 7 rows.  Platform is constrained to
+% slide in x, and the metronomes have a random offset for the upper mass.
+%
+
+sm_metronome_sync_param
+metronome.stem_upper_var = 1e-3;
+
+set_param('sm_metronome_sync_lots','StopTime','300');
+sim('sm_metronome_sync_lots')
+sm_metronome_sync_plot1angpos;
+
+%%
+sm_metronome_sync_plot1angpos;
+set(gca,'XLim',[M_time(end)-4 M_time(end)])
+
+%%
+set_param(bdroot,'StopTime','5.52*20');
+
+%%
+%clear all
+close all
+bdclose all
+
+##### SOURCE END #####
+--></body></html>
