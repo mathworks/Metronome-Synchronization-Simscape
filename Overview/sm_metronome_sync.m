@@ -15,7 +15,7 @@
 
 open_system('sm_metronome_sync')
 
-set_param(find_system('sm_metronome_sync','FindAll', 'on','type','annotation','Tag','ModelFeatures'),'Interpreter','off')
+set_param(find_system('sm_metronome_sync','MatchFilter',@Simulink.match.allVariants,'FindAll', 'on','type','annotation','Tag','ModelFeatures'),'Interpreter','off')
 
 %% Simulation Results from Simscape Logging
 %%
