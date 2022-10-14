@@ -9,6 +9,8 @@ Open the project file Metronome_Synchronization.prj to get started.
 
 ![](Overview/html/sm_metronome_sync_mechExpAnim.png)
 
+[![View Metronome Synchronization on Moving Platform on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/109700-metronome-synchronization-on-moving-platform)
+
 To learn more about modeling and simulation with Simscape, please visit:
 * [Simscape Getting Started Resources](https://www.mathworks.com/solutions/physical-modeling/resources.html)
 * Product Capabilities:
