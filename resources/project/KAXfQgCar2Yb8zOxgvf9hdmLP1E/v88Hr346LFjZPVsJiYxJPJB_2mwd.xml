@@ -1,2 +1,2 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<Info Type="Basic" GroupUUID="6146ecaf-d674-431c-8014-fea1babf58f2" Visible="1" Icon="" File="Models/sm_metronome_sync_lots.slx" Name="Many Metronomes, Constrained"/>
+<Info File="Models/sm_metronome_sync_lots.slx" GroupUUID="6146ecaf-d674-431c-8014-fea1babf58f2" Icon="" Name="Many Metronomes, Constrained" Type="Basic" Visible="1"/>

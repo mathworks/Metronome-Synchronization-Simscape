@@ -1,12 +1,17 @@
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Metronome Synchronization on Moving Platform</title><meta name="generator" content="MATLAB 9.14"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2023-03-18"><meta name="DC.source" content="sm_metronome_sync.m"><style type="text/css">
+      -->
+<title>Metronome Synchronization on Moving Platform</title>
+<meta name="generator" content="MATLAB 23.2">
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.date" content="2023-09-15">
+<meta name="DC.source" content="sm_metronome_sync.m">
+<style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -67,7 +72,57 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>Metronome Synchronization on Moving Platform</h1><!--introduction--><p>This example shows the phenomenon of metronomes synchronizing if they are placed on a platform that is free to slide back and forth.  This is an example of a system that follows the Kuramoto model.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#2">Model</a></li><li><a href="#3">Simulation Results from Simscape Logging</a></li><li><a href="#6">Simulation Results from Simscape Logging: Escapement Energy Off</a></li><li><a href="#10">Simulation Results from Simscape Logging: Many Rows</a></li><li><a href="#13">Simulation Results from Simscape Logging: Many Rows, Unconstrained</a></li><li><a href="#17">Simulation Results from Simscape Logging: Many Rows, Tolerances</a></li></ul></div><p><img vspace="5" hspace="5" src="sm_metronome_sync_mechExpAnim.png" alt=""> </p><h2 id="2">Model</h2><img vspace="5" hspace="5" src="sm_metronome_sync_01.png" alt=""> <h2 id="3">Simulation Results from Simscape Logging</h2><p>In the first test, we start all of the metronomes at initial angles and speeds. The amplitudes and frequencies settle to the same values due to the energy added by the escapement mechanism (modeled abstractly) and pendulum damping.  At the start of the test, all pendula are out of phase, and the platform is locked in place.</p><p>After a period of time, the platform is allowed to slide back and forth. Over time, the oscillations of the metronomes become synchronized, so that they are exactly in phase.  With different settings, the metronomes could also be exactly out of phase.</p><img vspace="5" hspace="5" src="sm_metronome_sync_02.png" alt=""> <img vspace="5" hspace="5" src="sm_metronome_sync_03.png" alt=""> <h2 id="6">Simulation Results from Simscape Logging: Escapement Energy Off</h2><p>In the second test, we turn off the abstract model of the energy added by the escapement mechanism and the friction in the pendula.  Even if we let the simulation run for a much longer time, the metronomes will not synchronize.  This shows that nonlinear effects are necessary to model certain phenomena.</p><img vspace="5" hspace="5" src="sm_metronome_sync_04.png" alt=""> <img vspace="5" hspace="5" src="sm_metronome_sync_05.png" alt=""> <h2 id="10">Simulation Results from Simscape Logging: Many Rows</h2><p>This test has 28 metronomes arranged in 7 rows.  Platform is constrained to only move along a single axis.</p><img vspace="5" hspace="5" src="sm_metronome_sync_06.png" alt=""> <img vspace="5" hspace="5" src="sm_metronome_sync_07.png" alt=""> <img vspace="5" hspace="5" src="sm_metronome_sync_08.png" alt=""> <h2 id="13">Simulation Results from Simscape Logging: Many Rows, Unconstrained</h2><p>This test has 28 metronomes arranged in 7 rows.  The platform can now move within a plane (translation in x and y, rotate about z).</p><img vspace="5" hspace="5" src="sm_metronome_sync_09.png" alt=""> <img vspace="5" hspace="5" src="sm_metronome_sync_10.png" alt=""> <img vspace="5" hspace="5" src="sm_metronome_sync_11.png" alt=""> <h2 id="17">Simulation Results from Simscape Logging: Many Rows, Tolerances</h2><p>This test has 28 metronomes arranged in 7 rows.  Platform is constrained to slide in x, and the metronomes have a random offset for the upper mass.</p><img vspace="5" hspace="5" src="sm_metronome_sync_12.png" alt=""> <img vspace="5" hspace="5" src="sm_metronome_sync_13.png" alt=""> <p class="footer">Copyright 2022-2023 The MathWorks, Inc.<br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2023a</a><br></p></div><!--
+  </style>
+</head>
+<body>
+<div class="content">
+<h1>Metronome Synchronization on Moving Platform</h1>
+<!--introduction-->
+<p>This example shows the phenomenon of metronomes synchronizing if they are placed on a platform that is free to slide back and forth. This is an example of a system that follows the Kuramoto model.</p>
+<!--/introduction-->
+<h2>Contents</h2>
+<div>
+<ul>
+<li>
+<a href="#2">Model</a>
+</li>
+<li>
+<a href="#3">Simulation Results from Simscape Logging</a>
+</li>
+<li>
+<a href="#6">Simulation Results from Simscape Logging: Escapement Energy Off</a>
+</li>
+<li>
+<a href="#10">Simulation Results from Simscape Logging: Many Rows</a>
+</li>
+<li>
+<a href="#13">Simulation Results from Simscape Logging: Many Rows, Unconstrained</a>
+</li>
+<li>
+<a href="#17">Simulation Results from Simscape Logging: Many Rows, Tolerances</a>
+</li>
+</ul>
+</div>
+<p>
+<img vspace="5" hspace="5" src="sm_metronome_sync_mechExpAnim.png" alt=""> </p>
+<h2 id="2">Model</h2>
+<img vspace="5" hspace="5" src="sm_metronome_sync_01.png" alt=""> <h2 id="3">Simulation Results from Simscape Logging</h2>
+<p>In the first test, we start all of the metronomes at initial angles and speeds. The amplitudes and frequencies settle to the same values due to the energy added by the escapement mechanism (modeled abstractly) and pendulum damping. At the start of the test, all pendula are out of phase, and the platform is locked in place.</p>
+<p>After a period of time, the platform is allowed to slide back and forth. Over time, the oscillations of the metronomes become synchronized, so that they are exactly in phase. With different settings, the metronomes could also be exactly out of phase.</p>
+<img vspace="5" hspace="5" src="sm_metronome_sync_02.png" alt=""> <img vspace="5" hspace="5" src="sm_metronome_sync_03.png" alt=""> <h2 id="6">Simulation Results from Simscape Logging: Escapement Energy Off</h2>
+<p>In the second test, we turn off the abstract model of the energy added by the escapement mechanism and the friction in the pendula. Even if we let the simulation run for a much longer time, the metronomes will not synchronize. This shows that nonlinear effects are necessary to model certain phenomena.</p>
+<img vspace="5" hspace="5" src="sm_metronome_sync_04.png" alt=""> <img vspace="5" hspace="5" src="sm_metronome_sync_05.png" alt=""> <h2 id="10">Simulation Results from Simscape Logging: Many Rows</h2>
+<p>This test has 28 metronomes arranged in 7 rows. Platform is constrained to only move along a single axis.</p>
+<img vspace="5" hspace="5" src="sm_metronome_sync_06.png" alt=""> <img vspace="5" hspace="5" src="sm_metronome_sync_07.png" alt=""> <img vspace="5" hspace="5" src="sm_metronome_sync_08.png" alt=""> <h2 id="13">Simulation Results from Simscape Logging: Many Rows, Unconstrained</h2>
+<p>This test has 28 metronomes arranged in 7 rows. The platform can now move within a plane (translation in x and y, rotate about z).</p>
+<img vspace="5" hspace="5" src="sm_metronome_sync_09.png" alt=""> <img vspace="5" hspace="5" src="sm_metronome_sync_10.png" alt=""> <img vspace="5" hspace="5" src="sm_metronome_sync_11.png" alt=""> <h2 id="17">Simulation Results from Simscape Logging: Many Rows, Tolerances</h2>
+<p>This test has 28 metronomes arranged in 7 rows. Platform is constrained to slide in x, and the metronomes have a random offset for the upper mass.</p>
+<img vspace="5" hspace="5" src="sm_metronome_sync_12.png" alt=""> <img vspace="5" hspace="5" src="sm_metronome_sync_13.png" alt=""> <p class="footer">Copyright 2022-2023 The MathWorks, Inc.<br>
+<a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2023b</a>
+<br>
+</p>
+</div>
+<!--
 ##### SOURCE BEGIN #####
 %% Metronome Synchronization on Moving Platform
 % 
@@ -204,4 +259,6 @@ close all
 bdclose all
 
 ##### SOURCE END #####
---></body></html>
+-->
+</body>
+</html>

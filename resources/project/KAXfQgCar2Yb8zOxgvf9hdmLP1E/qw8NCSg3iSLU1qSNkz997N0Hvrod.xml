@@ -1,2 +1,2 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<Info Type="StartUp" Visible="1" Icon="" File="Models/sm_metronome_sync.slx" Name="Metronome"/>
+<Info File="Models/sm_metronome_sync.slx" Icon="" Name="Metronome" Type="StartUp" Visible="1"/>
