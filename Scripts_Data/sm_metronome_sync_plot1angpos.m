@@ -3,7 +3,7 @@
 %
 % The code below plots metronome angles and platform velocity
 %
-% Copyright 2022-2023 The MathWorks, Inc.
+% Copyright 2022-2024 The MathWorks, Inc.
 
 % Generate simulation results if they don't exist
 if ~exist('simlog_sm_metronome_sync', 'var')
